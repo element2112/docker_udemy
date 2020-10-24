@@ -45,5 +45,12 @@ two ways:
 	
 	- docker file (recipe for creating docker image)
 		(think package.json for npm)
-		
+
+
+CREATE DOCKER file
+
+	- all docker files start with FROM
+	- FROM baseimage (use an official base image if possible)
+		- FROM scratch ... (an image with no base os)
+	
 
