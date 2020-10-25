@@ -52,5 +52,51 @@ CREATE DOCKER file
 	- all docker files start with FROM
 	- FROM baseimage (use an official base image if possible)
 		- FROM scratch ... (an image with no base os)
+
+BUIILDING DOCKER FILE
+	- "-t name" allows us to reference the image by what he choose instead of the hash
 	
+	" docker image build -t web1:1.0 . " (setting version to 1.0)
+	
+	"docker image ls" (lists all images on our docker host)
+	
+	"docker image rm web1:1.0" (remove an image)
+	
+	"docker image tag web1 bs009/web1:latest" (pushing to docker hub)
+	
+	"docker image rm -f c1b3" (delete an image -f is force. first four characters of image ID)
+	
+	"docker pull bs009/web1:latest" (pulling image from docker hub)
+	
+
+RUNNING IMAGE
+ "docker container ls" (showing all running containers)
+ 
+ "docker container run -it -p 5000:5000 -e FLASK_APP=app.py web1"
+ 
+ "docker container ls -a" (see all stopped containers)
+ 
+ "docker container rm condescending_darwin" (remove docker container. its good to not leave a bunch of stopped containers in docker host)
+ 
+ "docker container run -it --rm --name web1container -p 5000:5000 -e FLASK_APP=app.py -d web1" (removes container after it's finished and gives custom name)
+ 
+ "docker container logs -f web1container" (see logs of a container running in background)
+ 
+ "docker container stats" (real time metrics about container)
+ 
+ "docker container run -it --name web1container3 -p 5000 -e FLASK_APP=app.py -d --restart on-failure web1" (running another instance. When only specifying one port, docker auto binds to random port from host)
+ 
+ "docker container stop web1container" (stop docker container)
+ 
+-it : allowing docker to enable various linux symbols (like ctrl+c to kill a process, makes terminal interactive)
+
+-p : port ->> bind_port_on_docker_host:bind_port_within_docker_container
+
+-e : environment variable
+
+-d : runs container in background
+
+-f : tails logs in real time
+
+
 

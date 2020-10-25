@@ -30,7 +30,7 @@ COPY . .
 # docker image metadata that can be retrieved with a command
 # this is optional (key="value")
 # use \ to chain stuff for one instruction to prevent multiple layers
-LABEL maintainer="Brittanie" \
+LABEL maintainer="Brittanie S" \
       version="1.0"
 
 # different than RUN
