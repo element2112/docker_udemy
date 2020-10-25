@@ -87,6 +87,8 @@ RUNNING IMAGE
  "docker container run -it --name web1container3 -p 5000 -e FLASK_APP=app.py -d --restart on-failure web1" (running another instance. When only specifying one port, docker auto binds to random port from host)
  
  "docker container stop web1container" (stop docker container)
+
+-t : allows naming of image (-t a_name)
  
 -it : allowing docker to enable various linux symbols (like ctrl+c to kill a process, makes terminal interactive)
 
@@ -97,6 +99,41 @@ RUNNING IMAGE
 -d : runs container in background
 
 -f : tails logs in real time
+
+-v : volume ->> path_to_source_files:mount_path_to_container
+
+
+DOCKER VOLUMES
+
+- every time you make a code change, you would need to stop server, rebuild image, and run container to see live changes using nodemon or something similar
+	- docker volumes solves this 
+	
+- mount source code to the running docker container
+
+"docker container run -it -p 5000:5000 -e FLASH_APP=app.py --rm --name web1 -e FLASK_DEBUG=1 -v $PWD:/app web1"
+	- $PWD represents linux command to see current directory
+	- /app represents container mount point
+	- this is only good for dev mode obviously for production you do not need live changes
+	- can also do multiple volume mounts  (not sure yet why you would want to)
+	
+	
+DOCKER DEBUGGING (FOR WINDOWS/MACOS)
+- change alpine to slim if there's issues doing docker volumes
+
+"docker container exec -it web1 sh" (connect to already running container (just remoting into it's pc). This is for alpine, if using slim change sh to bash)
+"docker container exec -it web1 touch hi.txt" (single exec linux command that exits immediately instead of opening a shell)
+
+- running exec with --user makes sure that all files created are owned by user and not root (mine automatically were owned by my user group)
+
+"docker container exec -it --user "$(id -u):$(id -g)" web1 touch hi.txt" (getting userid and groupid and setting ownership there for new file created in container running alpine)
+
+
+LINKING MULTIPLE CONTAINERS OVER A NETWORK
+
+
+
+
+
 
 
 
