@@ -166,9 +166,44 @@ CREATING OWN BRIDGE NETWORK (to use name )
 
 PERSISTING DATA TO DOCKER HOST (aka not losing data when container stops)
 
+named volume: allow to supply name instead of file path and docker will manage volume in their own volume directory
+(perfect for databases)
+
+"docker volume create web2_redis" (can replace web2_redis with any name)
+
+"docker volume ls" (shows list of volumes)
+
+"docker volume inspect web2_redis" (more info on volume)
+
+"docker container run --rm -itd -p 6379:6379 --name redis --net firstnetwork -v web2_redis:/data redis:3.2-alpine" (adding -v with new redis container. /data is redis specific it seems)
+
+
+"docker exec redis redis-cli SAVE" (having to save the data in memory is redis specific)
 
 
 
+SHARING DATA BETWEEN CONTAINERS
+
+in docker file adding "VOLUME ["/app/public"]" says to expose this folder as a volume when the container runs. This folder is not accessable by other containers
+	as long as they add "--volumes-from web2" to their flags when running
 
 
+can automaticcaly see changes from other containers that are accessing the data
+	
+	
+	
+optimizing docker files
 
+.dockerignore
+
+(ignoring environment variables, node_modules, etc)
+
+.dockerignore
+.git/
+.foo/*
+**/*.swp
+**/*/.txt
+# the below adds an exception for a file special.txt
+!special.txt
+
+https://medium.com/mozilla-club-bbsr/dockerizing-a-mern-stack-web-application-ebf78babf136
