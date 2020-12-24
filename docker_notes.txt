@@ -207,3 +207,30 @@ optimizing docker files
 !special.txt
 
 https://medium.com/mozilla-club-bbsr/dockerizing-a-mern-stack-web-application-ebf78babf136
+
+
+DOCKER COMPOSE
+
+must tab in two spaces
+
+docker-compose build
+docker-compose pull
+docker-compose up (starts the project)
+
+docker-compose stop (if ctrl c doesn't work)
+
+
+# run the above all at once. add -d to run in background
+docker-compose up --build
+
+# see logs this way when running in background
+docker-compose logs -f
+
+# restart all containers
+docker-compose restart
+
+# restart a container
+docker-compose restart
+# run command on a specific container
+docker-compose exec web ls -ls
+
